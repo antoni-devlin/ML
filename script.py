@@ -1,12 +1,10 @@
-import numpy as np
+import time
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.neural_network import MLPRegressor
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_squared_error, r2_score
 import matplotlib.pyplot as plt
-from sklearn.metrics import r2_score
-import time
 
 # Replace 'your_data.csv' with your actual dataset
 data = pd.read_csv('london_weather.csv')
