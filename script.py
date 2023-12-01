@@ -6,18 +6,18 @@ from sklearn.neural_network import MLPRegressor
 from sklearn.metrics import mean_squared_error, r2_score
 import matplotlib.pyplot as plt
 
-# Replace 'your_data.csv' with your actual dataset
+# Import data
 data = pd.read_csv('london_weather.csv')
 
-# Replace 'target_column' with your target variable's name
+# Set up X and y variables for training and testing
 X = data.drop('precipitation', axis=1)
 y = data['precipitation']
 
-# Impute missing values in the target variable with the mean
+# Impute missing values in the target variable with the mean (this fixes null values, which some models can't work with)
 y.fillna(y.mean(), inplace=True)
 
 # Handle missing values in features if any
-X.fillna(0, inplace=True)  # Replace with your own strategy
+X.fillna(0, inplace=True)
 
 # Encode categorical variables if any
 X = pd.get_dummies(X)
@@ -30,10 +30,10 @@ scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
 
-# Measure the training time
+# Measure training time
 start_time = time.time()
 
-# Use a neural network model (MLPRegressor) instead of Linear Regression
+# Use a neural network model (MLPRegressor)
 model = MLPRegressor(hidden_layer_sizes=(100, 100, 50, 20), max_iter=1500, random_state=42)
 model.fit(X_train, y_train)
 
